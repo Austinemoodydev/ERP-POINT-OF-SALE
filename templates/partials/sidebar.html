@@ -1,0 +1,99 @@
+<ul class="nav flex-column">
+
+<!-- Dashboard: all authenticated users -->
+<li class="nav-item">
+<a href="/dashboard/"
+class="nav-link text-white">
+Dashboard
+</a>
+</li>
+
+<!-- Products: managers and storekeepers -->
+{% if request.user.is_manager or request.user.is_storekeeper %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+Products
+</a>
+</li>
+{% endif %}
+
+<!-- Inventory: managers and storekeepers -->
+{% if request.user.is_manager or request.user.is_storekeeper %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+Inventory
+</a>
+</li>
+{% endif %}
+
+<!-- Sales: cashiers and managers -->
+{% if request.user.is_cashier or request.user.is_manager %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+Sales
+</a>
+</li>
+{% endif %}
+
+<!-- Purchases: managers and storekeepers -->
+{% if request.user.is_manager or request.user.is_storekeeper %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+Purchases
+</a>
+</li>
+{% endif %}
+
+<!-- Accounting: accountants and managers -->
+{% if request.user.is_accountant or request.user.is_manager %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+Accounting
+</a>
+</li>
+{% endif %}
+
+<!-- HR: managers only -->
+{% if request.user.is_manager or request.user.is_superuser %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+HR
+</a>
+</li>
+{% endif %}
+
+<!-- Reports: accountants and managers -->
+{% if request.user.is_accountant or request.user.is_manager %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+Reports
+</a>
+</li>
+{% endif %}
+
+<!-- System Settings: superusers only -->
+{% if request.user.is_superuser %}
+<li class="nav-item">
+<a href="#"
+class="nav-link text-white">
+System Settings
+</a>
+</li>
+{% endif %}
+
+<!-- Logout: all authenticated users -->
+<li class="nav-item">
+<a href="/logout/"
+class="nav-link text-danger">
+Logout
+</a>
+</li>
+
+</ul>

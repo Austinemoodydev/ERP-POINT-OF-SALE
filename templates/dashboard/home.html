@@ -1,0 +1,75 @@
+{% extends 'base/dashboard.html' %}
+
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+
+<div class="col-md-3">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Daily Sales</h5>
+
+<h3>{{ daily_sales }}</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Monthly Sales</h5>
+
+<h3>{{ monthly_sales }}</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Customers</h5>
+
+<h3>{{ total_customers }}</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Products</h5>
+
+<h3>{{ total_products }}</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
