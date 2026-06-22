@@ -1,6 +1,6 @@
 from core.models import Branch
 from django.db.models import Sum
-from core.models import Branch
+
 from sales.models import SalesInvoice
 
 

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 from celery.schedules import crontab
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,13 +53,17 @@ INSTALLED_APPS = [
     'compliance',
     'saas',
     'rest_framework',
+    'corsheaders',
     'integrations',
     'analytics',
-
+    'bpm',
+    'operations',
+    'mobile',
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -103,6 +108,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
+            'charset': 'utf8mb4',
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'",
         },
     }
@@ -169,8 +175,8 @@ REST_FRAMEWORK = {
 }
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
-
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_CACHE_BACKEND = 'memory'
+CELERY_RESULT_BACKEND = 'cache'
 
 
 CELERY_ACCEPT_CONTENT = ['json']
@@ -187,6 +193,7 @@ CELERY_BEAT_SCHEDULE = {
 
 
         'task': 'analytics.tasks.generate_forecast',
+
 
         'schedule': crontab(hour=1)
 
@@ -237,3 +244,37 @@ CELERY_BEAT_SCHEDULE = {
     }
 
 }
+REST_FRAMEWORK = {
+
+
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+
+    ),
+
+
+
+    'DEFAULT_PERMISSION_CLASSES': (
+
+
+
+        'rest_framework.permissions.IsAuthenticated',
+
+    )
+
+
+}
+SIMPLE_JWT = {
+
+
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30)
+
+}
+CORS_ALLOW_ALL_ORIGINS = True

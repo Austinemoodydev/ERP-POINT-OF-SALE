@@ -241,3 +241,22 @@ tenant = models.ForeignKey(
     'saas.Tenant',
     on_delete=models.CASCADE
 )
+
+
+barcode_image = models.ImageField(
+
+
+    upload_to='barcodes/',
+
+
+    null=True,
+
+
+    blank=True
+
+)
+qr_image = models.ImageField(
+    upload_to='qr/',
+    blank=True,
+    null=True
+)

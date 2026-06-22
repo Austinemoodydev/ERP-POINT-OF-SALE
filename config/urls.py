@@ -30,7 +30,17 @@ urlpatterns = [
         'analytics/',
         include('analytics.urls')
     ),
+    path(
 
+        'api/mobile/',
+
+        include(
+
+            'mobile.urls'
+
+        )
+
+    ),
 ]
 
 if settings.DEBUG:
