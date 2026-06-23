@@ -1,0 +1,74 @@
+<!-- Customer Bar -->
+<div class="bg-blue-50 border-b px-4 py-2 flex justify-between items-center">
+    <div id="customerDisplay" class="text-sm text-gray-600">
+        <span class="text-gray-400">&#128100;</span> Walk-in Customer
+    </div>
+    <button onclick="openModal('customerModal')" class="text-blue-600 text-xs hover:underline">Change (F2)</button>
+</div>
+
+<!-- Cart Items -->
+<div class="flex-1 overflow-y-auto">
+    <table class="w-full text-sm">
+        <thead class="bg-gray-50 sticky top-0">
+            <tr>
+                <th class="text-left px-3 py-2 text-xs text-gray-500">ITEM</th>
+                <th class="text-center px-2 py-2 text-xs text-gray-500">QTY</th>
+                <th class="text-right px-3 py-2 text-xs text-gray-500">TOTAL</th>
+                <th class="px-2 py-2"></th>
+            </tr>
+        </thead>
+        <tbody id="cartBody">
+            <tr id="emptyCart">
+                <td colspan="4" class="text-center py-12 text-gray-400">
+                    <div class="text-4xl mb-2">&#128722;</div>
+                    <p class="text-sm">Cart is empty</p>
+                    <p class="text-xs">Click a product or scan barcode</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Totals -->
+<div class="border-t bg-gray-50 px-4 py-3 space-y-1">
+    <div class="flex justify-between text-sm">
+        <span class="text-gray-600">Subtotal</span>
+        <span id="subtotal">KES 0.00</span>
+    </div>
+    <div class="flex justify-between text-sm items-center">
+        <span class="text-gray-600">Discount</span>
+        <div class="flex items-center gap-1">
+            <input id="discountInput" type="number" value="0" min="0"
+                class="w-16 border rounded px-2 py-0.5 text-right text-sm" onchange="recalculate()">
+            <span class="text-gray-400 text-xs">KES</span>
+        </div>
+    </div>
+    <div class="flex justify-between text-sm">
+        <span class="text-gray-600">VAT (16%)</span>
+        <span id="vatAmount">KES 0.00</span>
+    </div>
+    <div class="flex justify-between text-lg font-bold border-t pt-2 mt-1">
+        <span>TOTAL</span>
+        <span id="grandTotal" class="text-blue-700">KES 0.00</span>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="px-3 py-2 grid grid-cols-2 gap-2 border-t">
+    <button onclick="holdSale()" class="bg-yellow-500 text-white py-2 rounded text-sm font-medium hover:bg-yellow-600">
+        &#9646;&#9646; Hold (F3)
+    </button>
+    <button onclick="openModal('holdSalesModal')" class="bg-gray-500 text-white py-2 rounded text-sm font-medium hover:bg-gray-600">
+        &#9654; Resume
+    </button>
+    <button onclick="clearCart()" class="bg-red-100 text-red-700 py-2 rounded text-sm font-medium hover:bg-red-200">
+        &#128465; Clear
+    </button>
+    <button onclick="openModal('paymentModal')" class="bg-green-600 text-white py-2 rounded text-sm font-medium hover:bg-green-700">
+        &#128179; Pay (F5)
+    </button>
+</div>
+<button onclick="openModal('paymentModal')"
+    class="mx-3 mb-3 w-full bg-blue-700 text-white py-3 rounded-lg font-bold text-lg hover:bg-blue-800">
+    COMPLETE SALE (F6)
+</button>

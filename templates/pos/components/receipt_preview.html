@@ -1,0 +1,33 @@
+<div id="receiptModal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-2xl w-80 mx-4">
+        <div class="flex justify-between items-center px-6 py-4 border-b">
+            <h3 class="text-lg font-bold">Receipt</h3>
+            <button onclick="closeModal('receiptModal')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        </div>
+        <div id="receiptContent" class="p-6 font-mono text-sm">
+            <div class="text-center mb-4">
+                <p class="font-bold text-lg">ABC SUPERMARKET</p>
+                <p class="text-xs text-gray-500">KRA PIN: P051234567X</p>
+                <p class="text-xs text-gray-500">Main Branch</p>
+                <p class="text-xs text-gray-500" id="receiptDate"></p>
+            </div>
+            <hr class="border-dashed my-2">
+            <div id="receiptItems" class="space-y-1"></div>
+            <hr class="border-dashed my-2">
+            <div class="flex justify-between text-xs"><span>Subtotal</span><span id="rSubtotal"></span></div>
+            <div class="flex justify-between text-xs"><span>VAT 16%</span><span id="rVat"></span></div>
+            <div class="flex justify-between font-bold mt-1"><span>TOTAL</span><span id="rTotal"></span></div>
+            <hr class="border-dashed my-2">
+            <div class="flex justify-between text-xs"><span id="rPayMethod">Cash</span><span id="rPaid"></span></div>
+            <div class="flex justify-between text-xs"><span>Change</span><span id="rChange"></span></div>
+            <div id="rMpesaRow" class="hidden flex justify-between text-xs"><span>M-Pesa</span><span id="rMpesa"></span></div>
+            <hr class="border-dashed my-2">
+            <p class="text-center text-xs text-gray-500">Thank You for Shopping With Us!</p>
+            <p class="text-center text-xs text-gray-400">Powered by POS ERP</p>
+        </div>
+        <div class="px-6 pb-6 grid grid-cols-2 gap-2">
+            <button onclick="printReceipt()" class="bg-blue-700 text-white py-2 rounded-lg text-sm font-medium">&#128424; Print</button>
+            <button onclick="closeModal('receiptModal')" class="border py-2 rounded-lg text-sm text-gray-600">Close</button>
+        </div>
+    </div>
+</div>

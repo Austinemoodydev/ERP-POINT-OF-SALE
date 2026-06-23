@@ -1,0 +1,17 @@
+<div class="p-2">
+    <h4 class="text-xs font-bold uppercase text-gray-400 px-2 py-3">Categories</h4>
+    <button onclick="filterCategory('all')" class="cat-btn w-full text-left px-3 py-2 rounded mb-1 bg-blue-600 text-white text-sm">
+        All Items
+    </button>
+    {% for category in categories %}
+    <button onclick="filterCategory('{{ category.id }}')"
+        class="cat-btn w-full text-left px-3 py-2 rounded mb-1 hover:bg-slate-700 text-sm text-gray-300">
+        {{ category.name }}
+    </button>
+    {% empty %}
+    <button class="cat-btn w-full text-left px-3 py-2 rounded mb-1 hover:bg-slate-700 text-sm text-gray-300">Food</button>
+    <button class="cat-btn w-full text-left px-3 py-2 rounded mb-1 hover:bg-slate-700 text-sm text-gray-300">Drinks</button>
+    <button class="cat-btn w-full text-left px-3 py-2 rounded mb-1 hover:bg-slate-700 text-sm text-gray-300">Medicine</button>
+    <button class="cat-btn w-full text-left px-3 py-2 rounded mb-1 hover:bg-slate-700 text-sm text-gray-300">Hardware</button>
+    {% endfor %}
+</div>

@@ -1,0 +1,59 @@
+{% load static %}
+<!-- Search & Scan Bar -->
+<div class="bg-white shadow px-4 py-3 flex gap-3 items-center">
+    <div class="flex-1 relative">
+        <input id="productSearch" type="text" placeholder="&#128269; Search product or scan barcode (F1)"
+            class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onkeyup="searchProducts(this.value)" onkeydown="handleBarcode(event)">
+    </div>
+    <div class="text-xs text-gray-400">F1 Search &nbsp;|&nbsp; Enter = Scan</div>
+</div>
+
+<!-- Quick Buttons -->
+<div class="px-4 py-2 flex gap-2 flex-wrap bg-white border-b">
+    <span class="text-xs text-gray-400 self-center">Quick:</span>
+    {% for product in quick_products %}
+    <button onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.selling_price }})"
+        class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200">
+        {{ product.name }}
+    </button>
+    {% empty %}
+    <button onclick="addToCartDirect('Bread', 50)" class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200">Bread</button>
+    <button onclick="addToCartDirect('Milk', 60)" class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200">Milk</button>
+    <button onclick="addToCartDirect('Coke', 80)" class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200">Coke</button>
+    <button onclick="addToCartDirect('Sugar 1kg', 150)" class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200">Sugar</button>
+    <button onclick="addToCartDirect('Paracetamol', 20)" class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200">Paracetamol</button>
+    {% endfor %}
+</div>
+
+<!-- Products Grid -->
+<div class="flex-1 overflow-y-auto p-3">
+    <div id="productsGrid" class="grid grid-cols-3 gap-3">
+        {% for product in products %}
+        <div class="product-card bg-white rounded-lg shadow p-3 cursor-pointer hover:shadow-md hover:ring-2 hover:ring-blue-400 transition"
+             data-category="{{ product.category_id }}"
+             data-name="{{ product.name|lower }}"
+             onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.selling_price }})">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="w-full h-20 object-cover rounded mb-2">
+            {% else %}
+            <div class="w-full h-20 bg-gray-100 rounded mb-2 flex items-center justify-center text-3xl">&#128230;</div>
+            {% endif %}
+            <p class="text-sm font-medium text-gray-800 truncate">{{ product.name }}</p>
+            <p class="text-blue-600 font-bold text-sm">KES {{ product.selling_price }}</p>
+            <p class="text-xs text-gray-400">Stock: {{ product.stock_quantity|default:0 }}</p>
+        </div>
+        {% empty %}
+        <!-- Demo cards when no products -->
+        {% for demo in "12345678901234"|make_list %}
+        <div class="bg-white rounded-lg shadow p-3 cursor-pointer hover:shadow-md hover:ring-2 hover:ring-blue-400 transition"
+             onclick="addToCartDirect('Product {{ forloop.counter }}', {{ forloop.counter }}00)">
+            <div class="w-full h-20 bg-gradient-to-br from-blue-50 to-blue-100 rounded mb-2 flex items-center justify-center text-3xl">&#128230;</div>
+            <p class="text-sm font-medium text-gray-800">Product {{ forloop.counter }}</p>
+            <p class="text-blue-600 font-bold text-sm">KES {{ forloop.counter }}00</p>
+            <p class="text-xs text-gray-400">Stock: 50</p>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>

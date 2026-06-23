@@ -1,0 +1,35 @@
+{% load static %}
+<nav class="bg-white shadow-md h-16 flex items-center justify-between px-5">
+
+    <!-- Left -->
+    <div class="flex items-center gap-4">
+        <button id="menuBtn" class="text-xl text-slate-700">&#9776;</button>
+        <h2 class="font-semibold text-lg">POS ERP</h2>
+        <div class="relative">
+            <input type="text" placeholder="Search..." class="border rounded-lg px-4 py-2 w-80 text-sm">
+        </div>
+    </div>
+
+    <!-- Right -->
+    <div class="flex items-center gap-4">
+        <select class="border rounded p-2 text-sm">
+            {% for branch in branches %}
+                <option>{{ branch.name }}</option>
+            {% empty %}
+                <option>Main Branch</option>
+            {% endfor %}
+        </select>
+
+        <select class="border rounded p-2 text-sm">
+            <option>EN</option>
+            <option>SW</option>
+        </select>
+
+        <button id="themeBtn" class="text-xl" title="Dark Mode">&#127769;</button>
+        <button id="fullscreenBtn" class="text-xl" title="Fullscreen">&#x26F6;</button>
+
+        {% include 'components/notifications.html' %}
+        {% include 'components/user_dropdown.html' %}
+    </div>
+
+</nav>

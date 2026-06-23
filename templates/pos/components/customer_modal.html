@@ -1,0 +1,28 @@
+<div id="customerModal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4">
+        <div class="flex justify-between items-center px-6 py-4 border-b">
+            <h3 class="text-lg font-bold">Select Customer</h3>
+            <button onclick="closeModal('customerModal')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        </div>
+        <div class="p-4">
+            <input type="text" placeholder="&#128269; Search by name or phone..."
+                class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onkeyup="searchCustomers(this.value)">
+        </div>
+        <div id="customerList" class="px-4 pb-4 max-h-64 overflow-y-auto space-y-2">
+            <div onclick="selectCustomer(0, 'Walk-in Customer', '')"
+                class="flex items-center gap-3 p-3 rounded-lg border hover:bg-blue-50 cursor-pointer">
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-lg">&#128100;</div>
+                <div>
+                    <p class="font-medium text-sm">Walk-in Customer</p>
+                    <p class="text-xs text-gray-400">No account</p>
+                </div>
+            </div>
+        </div>
+        <div class="px-6 pb-4">
+            <button class="w-full border-2 border-dashed border-blue-300 text-blue-600 py-2 rounded-lg text-sm hover:bg-blue-50">
+                + Add New Customer
+            </button>
+        </div>
+    </div>
+</div>

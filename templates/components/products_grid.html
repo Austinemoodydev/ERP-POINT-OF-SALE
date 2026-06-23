@@ -1,0 +1,51 @@
+<div class="bg-white rounded">
+<div class="p-3">
+<input
+placeholder="Search Product"
+>
+</div>
+<div class="grid grid-cols-4 gap-2">
+{% for product in products %}
+<div>
+<img>
+<p>
+{{product.name}}
+</p>
+<p>
+KES {{product.price}}
+</p>
+</div>
+{% endfor %}
+</div>
+</div>
+<div class="product-card"
+
+data-id="{{product.id}}"
+
+data-name="{{product.name}}"
+
+data-price="{{product.selling_price}}"
+
+data-tax="{{product.tax}}"
+
+>
+
+<img src="{{product.image.url}}">
+
+<h5>
+
+{{product.name}}
+
+</h5>
+
+
+<p>
+
+KES {{product.selling_price}}
+
+</p>
+
+</div>
+<tbody id="cartBody">
+
+</tbody>
