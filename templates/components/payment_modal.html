@@ -1,0 +1,155 @@
+<!-- F2.2 Enterprise Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-success text-white py-2">
+        <h5 class="modal-title fw-bold">
+          <i class="bi bi-credit-card me-2"></i>Process Payment
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="row g-0">
+          <!-- LEFT: Method selector -->
+          <div class="col-md-4 bg-light border-end p-3">
+            <p class="fw-bold text-muted small mb-2 text-uppercase">Payment Method</p>
+            <div class="d-grid gap-2">
+              <button class="btn btn-success payment-method-btn active" data-type="cash">
+                <i class="bi bi-cash-coin me-2"></i>Cash
+              </button>
+              <button class="btn btn-outline-primary payment-method-btn" data-type="mpesa">
+                <i class="bi bi-phone me-2"></i>M-Pesa
+              </button>
+              <button class="btn btn-outline-secondary payment-method-btn" data-type="card">
+                <i class="bi bi-credit-card me-2"></i>Card / POS
+              </button>
+              <button class="btn btn-outline-info payment-method-btn" data-type="bank">
+                <i class="bi bi-bank me-2"></i>Bank Transfer
+              </button>
+              <button class="btn btn-outline-warning payment-method-btn" data-type="credit">
+                <i class="bi bi-person-badge me-2"></i>Credit
+              </button>
+              <button class="btn btn-outline-dark payment-method-btn" data-type="split">
+                <i class="bi bi-layout-split me-2"></i>Split
+              </button>
+            </div>
+          </div>
+          <!-- RIGHT: Dynamic sections -->
+          <div class="col-md-8 p-3">
+            <div class="text-center mb-3 p-2 bg-success bg-opacity-10 rounded">
+              <div class="text-muted small">AMOUNT DUE</div>
+              <div class="display-6 fw-bold text-success" id="paymentTotal">KES 0.00</div>
+            </div>
+            <!-- CASH -->
+            <div id="cashSection" class="payment-section">
+              <label class="form-label fw-bold">Cash Received (KES)</label>
+              <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text bg-success text-white">KES</span>
+                <input type="number" id="cashReceived" class="form-control form-control-lg fs-4"
+                       placeholder="0.00" min="0" step="0.01">
+              </div>
+              <div class="d-flex gap-1 mb-3 flex-wrap">
+                <button class="btn btn-outline-secondary btn-sm quick-cash" data-amount="50">+50</button>
+                <button class="btn btn-outline-secondary btn-sm quick-cash" data-amount="100">+100</button>
+                <button class="btn btn-outline-secondary btn-sm quick-cash" data-amount="200">+200</button>
+                <button class="btn btn-outline-secondary btn-sm quick-cash" data-amount="500">+500</button>
+                <button class="btn btn-outline-secondary btn-sm quick-cash" data-amount="1000">+1,000</button>
+                <button class="btn btn-outline-secondary btn-sm quick-cash" data-amount="2000">+2,000</button>
+                <button class="btn btn-outline-secondary btn-sm quick-cash" data-amount="5000">+5,000</button>
+              </div>
+              <div class="alert alert-success d-flex justify-content-between align-items-center py-2">
+                <span class="fw-bold">Change</span>
+                <strong class="fs-5" id="changeAmount">KES 0.00</strong>
+              </div>
+            </div>
+            <!-- MPESA -->
+            <div id="mpesaSection" class="payment-section d-none">
+              <label class="form-label fw-bold">Customer Phone</label>
+              <div class="input-group input-group-lg mb-3">
+                <span class="input-group-text">+254</span>
+                <input type="tel" id="mpesaPhone" class="form-control" placeholder="7XXXXXXXX" maxlength="9">
+              </div>
+              <button class="btn btn-primary btn-lg w-100 mb-2" onclick="sendSTK()">
+                <i class="bi bi-phone me-2"></i>Send STK Push
+              </button>
+              <div id="mpesaStatus" class="alert d-none mt-2"></div>
+              <label class="form-label mt-2">M-Pesa Code (manual fallback)</label>
+              <input type="text" id="mpesaCode" class="form-control"
+                     placeholder="e.g. SFG7T3KXYZ" style="text-transform:uppercase;letter-spacing:2px;">
+            </div>
+            <!-- CARD -->
+            <div id="cardSection" class="payment-section d-none">
+              <label class="form-label fw-bold">Card Type</label>
+              <select id="cardType" class="form-select form-select-lg mb-3">
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+                <option value="amex">Amex</option>
+              </select>
+              <label class="form-label fw-bold">Approval / Transaction Code</label>
+              <input type="text" id="cardRef" class="form-control form-control-lg"
+                     placeholder="Enter approval code">
+            </div>
+            <!-- BANK -->
+            <div id="bankSection" class="payment-section d-none">
+              <label class="form-label fw-bold">Bank Reference</label>
+              <input type="text" id="bankRef" class="form-control form-control-lg mb-3"
+                     placeholder="Bank transfer reference number">
+              <label class="form-label fw-bold">Transfer Date</label>
+              <input type="date" id="bankDate" class="form-control form-control-lg">
+            </div>
+            <!-- CREDIT -->
+            <div id="creditSection" class="payment-section d-none">
+              <div id="creditCustomerInfo" class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                Please select a customer first to use credit.
+              </div>
+              <div id="creditLimitInfo" class="d-none">
+                <div class="row text-center mb-3">
+                  <div class="col-4">
+                    <div class="small text-muted">Credit Limit</div>
+                    <div class="fw-bold" id="creditLimit">KES 0</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="small text-muted">Used</div>
+                    <div class="fw-bold text-danger" id="creditUsed">KES 0</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="small text-muted">Available</div>
+                    <div class="fw-bold text-success" id="creditAvailable">KES 0</div>
+                  </div>
+                </div>
+                <label class="form-label fw-bold">Due Date</label>
+                <input type="date" id="creditDueDate" class="form-control form-control-lg">
+              </div>
+            </div>
+            <!-- SPLIT -->
+            <div id="splitSection" class="payment-section d-none">
+              <div id="splitRows"></div>
+              <button class="btn btn-outline-secondary btn-sm mt-1" onclick="addSplitRow()">
+                <i class="bi bi-plus-circle me-1"></i>Add Payment Method
+              </button>
+              <div class="mt-3 p-2 bg-light rounded">
+                <div class="d-flex justify-content-between">
+                  <span>Allocated</span><strong id="splitAllocated">KES 0.00</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Remaining</span>
+                  <strong id="splitRemaining" class="text-danger">KES 0.00</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer bg-light">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-x me-1"></i>Cancel
+        </button>
+        <button class="btn btn-success btn-lg px-5 fw-bold" onclick="submitPayment()" id="confirmPayBtn">
+          <i class="bi bi-check-circle me-2"></i>Confirm Payment
+          <kbd class="ms-1 bg-white text-success">F6</kbd>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

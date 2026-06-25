@@ -13,7 +13,7 @@
 <div class="px-4 py-2 flex gap-2 flex-wrap bg-white border-b">
     <span class="text-xs text-gray-400 self-center">Quick:</span>
     {% for product in quick_products %}
-    <button onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.selling_price }})"
+    <button onclick="addToCart({{ product.id }}, '{{ product.name|escapejs }}', {{ product.selling_price }})"
         class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200">
         {{ product.name }}
     </button>
@@ -33,7 +33,7 @@
         <div class="product-card bg-white rounded-lg shadow p-3 cursor-pointer hover:shadow-md hover:ring-2 hover:ring-blue-400 transition"
              data-category="{{ product.category_id }}"
              data-name="{{ product.name|lower }}"
-             onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.selling_price }})">
+             onclick="addToCart({{ product.id }}, '{{ product.name|escapejs }}', {{ product.selling_price }})">
             {% if product.image %}
             <img src="{{ product.image.url }}" class="w-full h-20 object-cover rounded mb-2">
             {% else %}

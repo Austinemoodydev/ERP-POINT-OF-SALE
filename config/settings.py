@@ -1,4 +1,4 @@
-
+﻿
 
 from datetime import timedelta
 from pathlib import Path
@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'pos_app',
     'django_celery_results',
     'django_celery_beat',
     'django.contrib.admin',
@@ -268,3 +269,4 @@ SIMPLE_JWT = {
 
 }
 CORS_ALLOW_ALL_ORIGINS = True
+

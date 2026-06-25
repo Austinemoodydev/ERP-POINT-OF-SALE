@@ -1,0 +1,43 @@
+﻿<!-- Shift Open/Close Modal -->
+<div class="modal fade" id="shiftModal" tabindex="-1" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="bi bi-clock me-2"></i>Shift Management</h5>
+      </div>
+      <div class="modal-body">
+        <!-- Open Shift -->
+        <div id="openShiftPanel">
+          <h6 class="fw-bold">Open New Shift</h6>
+          <label class="form-label">Opening Cash (KES)</label>
+          <input type="number" id="openingCash" class="form-control form-control-lg mb-3"
+                 placeholder="e.g. 5000">
+          <label class="form-label">Notes</label>
+          <textarea id="shiftOpenNotes" class="form-control mb-3" rows="2"
+                    placeholder="Optional notes..."></textarea>
+          <button class="btn btn-success w-100 btn-lg" onclick="openShift()">
+            <i class="bi bi-play-circle me-2"></i>Open Shift & Start POS
+          </button>
+        </div>
+        <!-- Close Shift -->
+        <div id="closeShiftPanel" class="d-none">
+          <h6 class="fw-bold">Close Shift</h6>
+          <div class="d-flex justify-content-between mb-1">
+            <span>Expected Cash</span><strong id="expectedCash">KES 0.00</strong>
+          </div>
+          <label class="form-label">Actual Cash in Drawer (KES)</label>
+          <input type="number" id="actualCash" class="form-control mb-2" placeholder="Count and enter">
+          <div class="d-flex justify-content-between mb-1">
+            <span>Variance</span><strong id="cashVariance" class="text-danger">KES 0.00</strong>
+          </div>
+          <label class="form-label">Variance Reason</label>
+          <textarea id="varianceReason" class="form-control mb-3" rows="2"
+                    placeholder="Explain any variance..."></textarea>
+          <button class="btn btn-danger w-100 btn-lg" onclick="closeShift()">
+            <i class="bi bi-stop-circle me-2"></i>Close Shift
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

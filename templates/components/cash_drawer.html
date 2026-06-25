@@ -1,0 +1,48 @@
+﻿<!-- Cash Drawer Panel -->
+<div class="modal fade" id="cashDrawerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title"><i class="bi bi-safe me-2"></i>Cash Drawer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-grid gap-2">
+          <button class="btn btn-outline-success btn-lg" onclick="openDrawer()">
+            <i class="bi bi-unlock me-2"></i>Open Drawer
+          </button>
+          <button class="btn btn-outline-primary btn-lg" data-bs-toggle="collapse"
+                  data-bs-target="#cashCountPanel">
+            <i class="bi bi-calculator me-2"></i>Count Cash
+          </button>
+          <div class="collapse" id="cashCountPanel">
+            <table class="table table-sm mt-2">
+              <thead><tr><th>Denomination</th><th>Count</th><th>Total</th></tr></thead>
+              <tbody>
+                <tr><td>1000</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="1000" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>500</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="500" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>200</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="200" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>100</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="100" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>50</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="50" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>20</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="20" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>10</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="10" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>5</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="5" value="0"></td><td class="denom-total">0</td></tr>
+                <tr><td>1</td><td><input type="number" class="form-control form-control-sm denom-count" data-denom="1" value="0"></td><td class="denom-total">0</td></tr>
+              </tbody>
+              <tfoot><tr><td colspan="2"><strong>Grand Total</strong></td><td><strong id="cashCountTotal">0</strong></td></tr></tfoot>
+            </table>
+          </div>
+          <button class="btn btn-outline-warning btn-lg" data-bs-toggle="collapse"
+                  data-bs-target="#safeDepositPanel">
+            <i class="bi bi-safe2 me-2"></i>Safe Deposit
+          </button>
+          <div class="collapse" id="safeDepositPanel">
+            <label class="form-label mt-2">Amount to Deposit</label>
+            <input type="number" id="safeDepositAmount" class="form-control mb-2" placeholder="KES">
+            <button class="btn btn-warning w-100" onclick="safeDeposit()">Confirm Deposit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
